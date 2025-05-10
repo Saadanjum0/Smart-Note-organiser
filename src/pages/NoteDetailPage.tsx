@@ -519,7 +519,7 @@ const NoteDetailPage = () => {
             Error loading document. It might have been deleted or an issue occurred.
           </AlertDescription>
         </Alert>
-        <Button onClick={() => navigate("/dashboard")} className="mt-6">
+        <Button onClick={() => navigate("/app")} className="mt-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Button>
@@ -741,7 +741,7 @@ const NoteDetailPage = () => {
         <div className="flex flex-col h-screen bg-gray-50">
             <header className="bg-white border-b px-6 py-3 flex items-center justify-between sticky top-0 z-10">
                 <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" onClick={() => navigate("/dashboard")} className="text-gray-600 hover:text-gray-800">
+                    <Button variant="ghost" size="sm" onClick={() => navigate("/app")} className="text-gray-600 hover:text-gray-800">
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Dashboard
                     </Button>
