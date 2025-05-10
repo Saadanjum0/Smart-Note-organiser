@@ -224,7 +224,7 @@ const LandingPage: React.FC = () => {
       <footer className="py-10 border-t border-primary-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-primary-500 dark:text-primary-400">
           <p>&copy; {new Date().getFullYear()} SmartSummarizer. All rights reserved.</p>
-          <p className="mt-1">Built with Passion & AI.</p>
+          <p className="mt-1">Built with Passion & AI by Saad and Abdullah.</p>
         </div>
       </footer>
     </div>
