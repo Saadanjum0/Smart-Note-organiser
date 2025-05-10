@@ -30,14 +30,16 @@ const queryClient = new QueryClient({
 // ProtectedRoute component to wrap routes that need authentication
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user, loading } = useAuth();
+  
   if (loading) {
-    // Optional: return a global loading spinner/page here
     return <div>Loading application...</div>; 
   }
+  
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  return <MainLayout>{children}</MainLayout>; // Wrap authenticated content with MainLayout
+  
+  return <MainLayout>{children}</MainLayout>;
 };
 
 const App = () => (
@@ -47,24 +49,25 @@ const App = () => (
       <Sonner position="top-right" />
       <BrowserRouter>
         <AuthProvider>
-            <Routes>
+          <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Protected App Routes */}
             <Route path="/app" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<Navigate to="/app" replace />} />
             <Route path="/notes/:id" element={<ProtectedRoute><NoteDetailPage /></ProtectedRoute>} />
             <Route path="/import" element={<ProtectedRoute><ImportPage /></ProtectedRoute>} />
             <Route path="/tags" element={<ProtectedRoute><TagsPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-            {/* Add other protected routes here, e.g., SearchPage if it's part of the authed app */}
-            {/* <Route path="/search" element={<ProtectedRoute><SearchPage /></ProtectedRoute>} /> */}
+            <Route path="/search" element={<ProtectedRoute><SearchPage /></ProtectedRoute>} />
             
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            {/* Catch all route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

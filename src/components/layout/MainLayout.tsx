@@ -29,8 +29,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
   useEffect(() => {
     if (!loading && !user) {
-      // console.log("[MainLayout] User became null while loading=false, navigating to login.");
-      // navigate('/login', { replace: true }); // This can conflict with signOut's navigation
+      navigate('/login', { replace: true });
     }
   }, [user, loading, navigate]);
 
@@ -86,13 +85,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     { path: '/tags', icon: <TagsIcon className="h-5 w-5" />, label: 'Tags' },
     {
       action: () => navigate('/import'), 
-      icon: <FileUp className="h-5 w-5" />, // Adjusted icon size for consistency
+      icon: <FileUp className="h-5 w-5" />,
       label: 'Import', 
       isCentral: true 
     },
-    { path: '/profile', icon: <Settings className="h-5 w-5" />, label: 'Profile' },
-    // Removed the 5th placeholder item for a 4-item layout by default for now
-    // If 5 items are desired, a visible 5th item should be defined or the placeholder styling adjusted
+    { path: '/profile', icon: <Settings className="h-5 w-5" />, label: 'Profile' }
   ];
 
   if (loading && !user) {
