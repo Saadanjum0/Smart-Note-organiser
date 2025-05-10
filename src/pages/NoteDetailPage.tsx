@@ -355,16 +355,11 @@ const NoteDetailPage = () => {
     try {
         const generatedFlashcardsArray = await generateFlashcardsFromSummary(note.ai_summary);
         if (generatedFlashcardsArray && generatedFlashcardsArray.length > 0) {
-            const updateSuccess = await updateNote(note.id, { ai_flashcards: generatedFlashcardsArray });
-            if (updateSuccess) {
-                setFlashcards(generatedFlashcardsArray);
-                setActiveTab("flashcards");
-                setCurrentFlashcardIndex(0);
-                setShowFlashcardAnswer(false);
-                toast.success("Flashcards generated and saved!");
-            } else {
-                toast.error("Generated flashcards but failed to save them. Please try again.");
-            }
+            setFlashcards(generatedFlashcardsArray);
+            setActiveTab("flashcards");
+            setCurrentFlashcardIndex(0);
+            setShowFlashcardAnswer(false);
+            toast.success("Flashcards generated successfully!");
         } else if (generatedFlashcardsArray && generatedFlashcardsArray.length === 0) {
             toast.info("No distinct flashcard points could be extracted from the summary.");
         } else {
@@ -597,7 +592,7 @@ const NoteDetailPage = () => {
                         className="text-xs bg-purple-600 hover:bg-purple-700"
                       >
                         {isGeneratingFlashcards ? <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin"/> : <LayersIcon className="mr-1.5 h-3.5 w-3.5" />} 
-                        {flashcards.length > 0 ? "Re-generate & Save" : "Create & Save"} Flashcards
+                        {flashcards.length > 0 ? "Re-generate Flashcards" : "Generate Flashcards"}
                       </Button>
                     </div>
                   </div>
@@ -681,24 +676,19 @@ const NoteDetailPage = () => {
                         <div className="flex items-center space-x-2">
                             {flashcards.length > 0 && (
                                 <Button onClick={handleDownloadFlashcardsPDF} variant="outline" size="sm" className="text-xs">
-                                    <Download className="mr-1.5 h-3.5 w-3.5" /> Download PDF
-                </Button>
+                                    <Download className="mr-1.5 h-3.5 w-3.5" /> Export as PDF
+                                </Button>
                             )}
-                            {flashcards.length > 0 && (
-                                <Button onClick={handleExportFlashcardsForAnki} variant="outline" size="sm" className="text-xs">
-                                    <Download className="mr-1.5 h-3.5 w-3.5" /> Export for Anki (JSON)
-                  </Button>
-                )}
-              </div>
-        </div>
-            </CardHeader>
+                        </div>
+                    </div>
+                </CardHeader>
                 <CardContent className="p-6" ref={flashcardContainerRef}>
-                    {isGeneratingFlashcards && <div className="flex items-center justify-center py-10"><Loader2 className="h-8 w-8 animate-spin text-purple-500"/><p className="ml-2">Generating...</p></div>}
+                    {isGeneratingFlashcards && <div className="flex items-center justify-center py-10"><Loader2 className="h-8 w-8 animate-spin text-purple-500"/><p className="ml-2">Generating flashcards...</p></div>}
                     {!isGeneratingFlashcards && flashcards.length === 0 && (
                         <div className="text-center py-12">
                             <LayersIcon className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                             <p className="text-gray-500 dark:text-gray-400 text-sm">
-                                No flashcards generated yet. Click "Create Flashcards" in the AI Summary tab.
+                                No flashcards generated yet. Click "Generate Flashcards" in the AI Summary tab to create flashcards from the summary.
                             </p>
                         </div>
                     )}
