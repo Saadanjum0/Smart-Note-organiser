@@ -82,7 +82,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   };
 
   const navItems: NavItem[] = [
-    { path: '/', icon: <Home className="h-5 w-5" />, label: 'Dashboard' },
+    { path: '/app', icon: <Home className="h-5 w-5" />, label: 'Dashboard' },
     { path: '/tags', icon: <TagsIcon className="h-5 w-5" />, label: 'Tags' },
     {
       action: () => navigate('/import'), 
